@@ -38,7 +38,7 @@
 
                 // var controllers = params.controllers
 
-                var apiUri = '/api/ns/login';
+                var apiUri = '/api/rbb/login';
 
                 router.post(
                     apiUri,
