@@ -1,0 +1,19 @@
+{
+    "name": "reactbb-plugin",
+    "version": "1.0.0",
+    "description": "Required for ReactBB to work",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "async": "^2.1.5",
+        "express-brute": "^1.0.1",
+        "moment": "^2.18.0"
+    },
+    "nbbpm": {
+        "compatibility": "^0.9.0 || ^1.0.0"
+    }
+}
