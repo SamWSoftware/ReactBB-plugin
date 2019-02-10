@@ -1,5 +1,5 @@
 {
-    "name": "reactbb-plugin",
+    "name": "nodebb-plugin-reactbb-plugin",
     "version": "1.0.0",
     "description": "Required for ReactBB to work",
     "main": "index.js",

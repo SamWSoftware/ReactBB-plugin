@@ -1,6 +1,6 @@
 {
-    "id": "reactbb-plugin",
-    "name": "NodeBB Login",
+    "id": "nodebb-plugin-reactbb-plugin",
+    "name": "ReactBB NodeBB Login",
     "description": "Simple API endpoint for external login. Special use case: external login check if user's credentials are valid.",
     "url": "",
     "library": "./plugin/index.js",
