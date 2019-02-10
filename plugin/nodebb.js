@@ -3,6 +3,7 @@
 
     Module.exports = {
         adminSockets: NodeBB.require('./src/socket.io/admin').plugins,
+        controllers: NodeBB.require('./src/controllers/index'),
         db: NodeBB.require('./src/database'),
         emitter: new(require('events')).EventEmitter(),
         meta: NodeBB.require('./src/meta'),
@@ -13,6 +14,7 @@
         socketIndex: NodeBB.require('./src/socket.io/index'),
         topics: NodeBB.require('./src/topics'),
         user: NodeBB.require('./src/user'),
+        auth: NodeBB.require('./src/authentication'),
 
         utils: NodeBB.require('./public/src/utils'),
         helpers: NodeBB.require('./src/controllers/helpers'),

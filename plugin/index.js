@@ -10,6 +10,11 @@
     var db = nodebb.db
     var passwordUtil = nodebb.password
     var winston = nodebb.winston
+
+    //ones I've added
+    var Auth = nodebb.auth;
+    var controllers = nodebb.controllers;
+
     var store = new ExpressBrute.MemoryStore();
 
     var settings = {
@@ -39,10 +44,10 @@
 
                 // var controllers = params.controllers
 
-                var apiUri = '/api/rbb/login';
+                var baseURL = '/api/rbb/';
 
                 router.post(
-                    apiUri,
+                    baseURL + 'login',
                     userDefence.getMiddleware({
                         key: function(req, res, next) {
                             // prevent too many attempts for the same username
@@ -134,6 +139,66 @@
                                 });
                             }
                         );
+                    }
+                );
+
+                router.post(
+                    baseURL + 'register',
+                    Auth.middleware.applyBlacklist,
+                    controllers.authentication.register
+                );
+                router.create(
+                    baseURL + 'create',
+                    (req, res, next) => {
+                        let uid = null,
+                            userObject = null;
+                        async.waterfall([
+                                next => {
+                                    user.create(req, next)
+                                },
+                                function(_uid, next) {
+                                    if (!_uid) {
+                                        return next(
+                                            new Error('User ' + username + ' does not exist')
+                                        );
+                                    }
+
+                                    uid = _uid;
+                                    next();
+                                },
+                                function(next) {
+                                    async.parallel({
+                                            user: async.apply(user.getUserData, uid),
+                                            secure: async.apply(db.getObjectFields, 'user:' + uid, [
+                                                'password',
+                                                'banned',
+                                                'passwordExpiry',
+                                                'email:confirmed',
+                                            ]),
+                                            isAdmin: async.apply(user.isAdministrator, uid),
+                                        },
+                                        next
+                                    );
+                                },
+                                function(payload, next) {
+                                    if (parseInt(payload.secure.banned) === 1) {
+                                        return next(new Error('User ' + username + ' is banned.'));
+                                    }
+                                    next(payload.user);
+                                }
+                            ],
+                            // the callback function
+                            (err, user) => {
+                                if (error) {
+                                    return res.status(403).json({
+                                        message: error.message,
+                                    });
+                                }
+
+                                console.log('userObject', user);
+
+                                res.json(user);
+                            });
                     }
                 );
 
