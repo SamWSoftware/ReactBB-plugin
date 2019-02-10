@@ -4,11 +4,12 @@
     var ExpressBrute = require('express-brute');
     var moment = require('moment');
     var async = require('async');
-    var utils = module.parent.require('./utils;')
-    var user = module.parent.require('./user');
-    var db = module.parent.require('./db');
-    var passwordUtil = module.parent.require('./password');
-    var winston = module.parent.require('./winston');
+    var nodebb = require('./nodebb')
+    var utils = nodebb.utils
+    var user = nodebb.user
+    var db = nodebb.db
+    var passwordUtil = nodebb.password
+    var winston = nodebb.winston
     var store = new ExpressBrute.MemoryStore();
 
     var settings = {
