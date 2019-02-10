@@ -1,8 +1,8 @@
 {
-    "id": "nodebb-plugin-ns-login-reloaded",
+    "id": "reactbb-plugin",
     "name": "NodeBB Login",
     "description": "Simple API endpoint for external login. Special use case: external login check if user's credentials are valid.",
-    "url": "https://github.com/Magictea-Intl/nodebb-plugin-ns-login",
+    "url": "",
     "library": "./plugin/index.js",
     "hooks": [{
         "hook": "static:app.load",
